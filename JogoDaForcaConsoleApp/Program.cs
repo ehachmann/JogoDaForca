@@ -3,7 +3,7 @@
     internal class Program
     {
 
-        // Versão 3: Exibindo os caracteres que foram acertados          
+        // Versão 4: Apresentando o retorno se o jogador acertou ou enforcou        
         static void Main(string[] args)
         {
             while(true)
@@ -12,12 +12,11 @@
 
                 char[] letrasEncontradas = new char[palavraSecreta.Length];
 
-                for (int caractere = 0; caractere < letrasEncontradas.Length, caractere++)
+                for (int caractere = 0; caractere < letrasEncontradas.Length; caractere++)
                 {
                     letrasEncontradas[caractere] = '_';
                    
                 }
-
 
                 int quantidadeErros = 0;
                 bool jogadorEnforcou = false;
@@ -36,19 +35,43 @@
                     Console.WriteLine("Digite uma letra: ");
                     char chute = Console.ReadLine()[0]; // Obtem apenas o primeiro caracter de uma string
 
+                    bool letraFoiEncontrada = false;
+
                     for (int contador = 0; contador < palavraSecreta.Length; contador++)
                     {
                        char letraAtual = palavraSecreta[contador];
-                       
+
                         if (chute == letraAtual)
                         {
                             letrasEncontradas[contador] = letraAtual;
                         }
                     }
 
-                    Console.ReadLine();
+                    if (letraFoiEncontrada == false)
+                        quantidadeErros++;
 
-                } while (jogadorAcertou == false || jogadorEnforcou == false);
+                    dicaDaPalavra = string.Join(" ", letrasEncontradas);
+
+                    jogadorAcertou = dicaDaPalavra == palavraSecreta;
+
+                    jogadorEnforcou = quantidadeErros > 5;
+
+                    if (jogadorAcertou)
+                    {
+                        Console.WriteLine("---------------------------------------");
+                        Console.WriteLine($"Jogador acertou a palavra secreta! Era {palavraSecreta}");
+                        Console.WriteLine("---------------------------------------");
+                    }
+                    else if (jogadorEnforcou)
+                    {
+                        Console.WriteLine("---------------------------------------");
+                        Console.WriteLine($"Que azar, tente novamente! A palavra era {palavraSecreta}");
+                        Console.WriteLine("---------------------------------------");
+                    }
+
+                } while (jogadorAcertou == false && jogadorEnforcou == false);
+
+                Console.ReadLine();
 
             }
 
