@@ -3,7 +3,7 @@
     internal class Program
     {
 
-        // Versão 2: Exibir palavra secreta com traços            
+        // Versão 3: Exibindo os caracteres que foram acertados          
         static void Main(string[] args)
         {
             while(true)
@@ -18,21 +18,37 @@
                    
                 }
 
-                string dicaDaPalavra = string.Join(" ", letrasEncontradas);
 
-                Console.Clear();
-                Console.WriteLine("-------------------------------------------");
-                Console.WriteLine("              Jogo da Forca!               ");
-                Console.WriteLine("-------------------------------------------");
-                Console.WriteLine($"Palavra secreta: {dicaDaPalavra}");
+                int quantidadeErros = 0;
+                bool jogadorEnforcou = false;
+                bool jogadorAcertou = false;
 
-                Console.WriteLine("Digite uma letra: ");
-                char chute = Console.ReadLine()[0]; // Obtem apenas o primeiro caracter de uma string
+                do
+                {
+                    string dicaDaPalavra = string.Join(" ", letrasEncontradas);
 
-                Console.WriteLine(chute);
+                    Console.Clear();
+                    Console.WriteLine("-------------------------------------------");
+                    Console.WriteLine("              Jogo da Forca!               ");
+                    Console.WriteLine("-------------------------------------------");
+                    Console.WriteLine($"Palavra secreta: {dicaDaPalavra}");
 
-                Console.ReadLine();
+                    Console.WriteLine("Digite uma letra: ");
+                    char chute = Console.ReadLine()[0]; // Obtem apenas o primeiro caracter de uma string
 
+                    for (int contador = 0; contador < palavraSecreta.Length; contador++)
+                    {
+                       char letraAtual = palavraSecreta[contador];
+                       
+                        if (chute == letraAtual)
+                        {
+                            letrasEncontradas[contador] = letraAtual;
+                        }
+                    }
+
+                    Console.ReadLine();
+
+                } while (jogadorAcertou == false || jogadorEnforcou == false);
 
             }
 
