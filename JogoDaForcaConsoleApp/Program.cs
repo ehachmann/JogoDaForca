@@ -10,7 +10,7 @@
 
             while (true)
             {
-                string[] palavras = 
+                string[] palavras =
                 {
                     "ABACATE",
                     "ABACAXI",
@@ -101,6 +101,7 @@
                             letrasEncontradas[contador] = letraAtual;
                             letraFoiEncontrada = true;
                         }
+
                     }
 
                     if (letraFoiEncontrada == false)
